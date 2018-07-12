@@ -1,0 +1,26 @@
+body {
+    background-image: url("../images/bg.png")
+}
+
+h3 {
+    color: black;
+}
+.navcenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#main-container {
+    margin-top: 40px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background: lightgrey;
+}
+
+#triviaTitle {
+    text-align: center;
+}
