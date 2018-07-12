@@ -19,8 +19,14 @@ h3 {
     margin-right: auto;
     text-align: center;
     background: lightgrey;
+    height: 500px;
+    border: #28A745 7px solid;
 }
 
 #triviaTitle {
     text-align: center;
+}
+
+#start {
+    font-size:75px;
 }

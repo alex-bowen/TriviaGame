@@ -1,6 +1,4 @@
-// Start button --- runs giant quiz function
 
-// Make an array of the questions (an array of objects), change out with $(#questions)
 
 // Timer ticks for each question, moves on if user doesn't answer
 
@@ -9,12 +7,12 @@
 // End: timer is gone. Tally of correct/incorrect answers appears
 
 // Start over button -- resets the game, DOES NOT reload the page
-
+var currentTime = "00:00";
 
 var questions = [
     {
         question: "Andy Dwyer's alter-ego, Agent Burt Macklin, has a brother. What's his name?",
-        answers: ["Kip Macklin", "Hugh Jackman", "Kip Hackman", "Burt Hackman"],
+        answers: ["Kip Macklin", "Hugh Jackman", "Kip Hackman", "Kurt Macklin"],
         correctAnswer: "Kip Hackman",
         image: "../images/macklin.gif"
         //will need to add syntax like: innerHTML = answer + '<img src="'+fruit.image+'">';
@@ -40,6 +38,31 @@ var questions = [
         correctAnswer: "Perry",
         image: "../images/treatyoself.gif"
     },
+    {
+        question: "What was the name of the failed sports complex that ended Ben's career as boy-mayor of Partridge, MN?",
+        answers: ["Ice Town", "Skate Town", "Ice Kingdom", "Snow Town"],
+        correctAnswer: "Ice Town",
+        image: "../images/macklin.gif"
+    },
+    {
+        question: "Which character wins an award for female empowerment?",
+        answers: ["Leslie Knope", "Ron Swanson", "Donna Meagle", "Anne Perkins"],
+        correctAnswer: "Ron Swanson",
+        image: "../images/macklin.gif"
+    },
+    {
+        question: "Who buys Tom's first (major) successful business, Rent-A-Swag?",
+        answers: ["Trevor Nelson", "Jean-Ralphio", "Dr. Saperstein", "Chris Traeger"],
+        correctAnswer: "Dr. Saperstein",
+        image: "../images/macklin.gif"
+    },
+    {
+        question: "Who plays beloved Pawnee's beloved mayor, Walter Gunderson?",
+        answers: ["Chevy Chase", "Rick Moranis", "Nick Offerman", "Bill Murray"],
+        correctAnswer: "Bill Murray",
+        image: "../images/macklin.gif"
+    },
+
 
 
 ];
@@ -47,19 +70,35 @@ console.log(questions[0].question);
 console.log(questions[0].answers[0]);
 
 // giant loop for question
+// probably needs to be inside a function, called when start button is clicked 
 
-for (var i = 0; i < questions.length; i++) {
-    console.log(questions[i].question);
-    $('#question').html(questions[i].question);
+function theQuiz() {
 
-    //loops through answers
-    for (var j = 0; j < questions[i].answers.length; j++) {
-        console.log(questions[i].answers[j]);
-        $('#answers').append("<br>" + questions[i].answers[j]);
+    $("#start").hide();
+
+    // start the timer  
+
+    // and show it somewhere
+    $("#timer").html(currentTime);
+
+
+    for (var i = 0; i < questions.length; i++) {
+        console.log(questions[i].question);
+        $('#question').html(questions[i].question);
+
+
+        //loops through, adds answers
+        for (var j = 0; j < questions[i].answers.length; j++) {
+            console.log(questions[i].answers[j]);
+            $('#answers').append("<br>" + questions[i].answers[j]);
+        }
+
     }
-    // start the timer
 
-    
+
 
 }
 
+
+// start button
+$("#start").click(theQuiz);
