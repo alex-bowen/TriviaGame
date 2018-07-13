@@ -17,20 +17,41 @@
 
 <body>
   <nav class="navbar navbar-light bg-success navcenter">
-    <span class="navbar-brand mb-0 h1"><h1>Parks &amp; Rec Trivia</h1></span>
+    <span class="navbar-brand mb-0 h1">
+      <h1>Parks &amp; Rec Trivia</h1>
+    </span>
   </nav>
 
   <div class="container" id="main-container">
-    <br><br>
-    <h3 id="question"></h3>
-    <h1 id="timer"></h1>
-    <p id="answers"></p>
-    <div id="gifs"></div>
-    <br><br><br>
+
+    <!-- start button -->
     <button type="button" class="btn btn-success btn-lg" id="start">START</button>
 
-    
-    
+    <div id="questions">
+      <h2 id="question"></h3>
+      <br>
+      <h3 id="timer"></h1>
+      <div id="answer-buttons">
+        <br>
+        <button type="button" class="btn btn-success btn-block" id="answerA"></button>
+        <br>
+        <button type="button" class="btn btn-success btn-block" id="answerB"></button>
+        <br>
+        <button type="button" class="btn btn-success btn-block" id="answerC"></button>
+        <br>
+        <button type="button" class="btn btn-success btn-block" id="answerD"></button>
+      </div>
+    </div>
+    <div id="gifs"></div>
+
+    <br>
+    <br>
+    <br>
+
+    <!-- start over -->
+    <button type="button" class="btn btn-success btn-lg" id="start-over">TRY AGAIN</button>
+
+
   </div>
   <!-- jQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
