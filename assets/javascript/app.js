@@ -1,5 +1,12 @@
+// Currently, the program is not reading my "current" variable within the for loop and does not increment properly because of this. Really looking forward to cleaning this up and making function with some help.
+
 $(document).ready(function () {
     console.log("ready!");
+
+    
+    $("#start-over").hide();
+    $("#questions").hide();
+
 
     var questions = [
         {
@@ -60,12 +67,13 @@ $(document).ready(function () {
     var currentTime = 3;
     var current = 0;
     // collect info from button user picks
-    // var userChoice;
-    // var answerA;
+    var userChoice;
     var questionInterval;
+    var correctCount;
+    var wrongCount;
 
     $("#start-over").hide();
-    $("#answer-buttons").hide();
+    $("#questions").hide();
 
     // start button
     $("#start").click(startQuiz);
@@ -91,32 +99,12 @@ $(document).ready(function () {
         }
     }
 
-    // function pushValueA() {
-    //     userChoice = $('#answerA');
-    // }
-    // function pushValueB() {
-    //     userChoice = $('#answerB');
-    // } 
-    // function pushValueC() {
-    //     userChoice = $('#answerC');
-    // } 
-    // function pushValueD() {
-    //     userChoice = $('#answerD');
-    // }
 
-    // $('#answerA').click(pushValueA());
-    // $('#answerB').click(pushValueB());
-    // $('#answerC').click(pushValueC());
-    // $('#answerD').click(pushValueD());
-
-
-    // giant loop for question
-    // probably needs to be inside a function, called when start button is clicked 
 
     function startQuiz() {
 
         $("#start").hide();
-        $("#answer-buttons").show();
+        $("#questions").show();
         $("#timer").html("You have " + currentTime + " seconds left.");
 
 
@@ -143,6 +131,24 @@ $(document).ready(function () {
 
         progressLogic();
 
+        function pushValueA() {
+            userChoice = $('#answerA');
+        }
+        function pushValueB() {
+            userChoice = $('#answerB');
+        } 
+        function pushValueC() {
+            userChoice = $('#answerC');
+        } 
+        function pushValueD() {
+            userChoice = $('#answerD');
+        }
+    
+        $('#answerA').click(pushValueA());
+        console.log(userChoice);
+        $('#answerB').click(pushValueB());
+        $('#answerC').click(pushValueC());
+        $('#answerD').click(pushValueD());
 
     }
 
@@ -156,6 +162,14 @@ $(document).ready(function () {
             
             $('#question').html(questions[current].question);
 
+        } else if (userChoice === questions[current].correctAnswer) {
+            // correctAnswer function
+            current++;
+        } else if (userChoice !== questions[current].correctAnswer) {
+            // wrongAnswer function
+            current++
+        } else if (current === questions.length) {
+            // results function
         }
     
     }
