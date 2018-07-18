@@ -2,11 +2,11 @@ $("#start").on("click", function () {
     game.start();
 });
 
-$(document).on("click", "#end", function() {
+$(document).on("click", "#end", function () {
     game.done();
 });
 
-$(document).on("click", "#restart", function() {
+$(document).on("click", "#restart", function () {
     $("#sub-div").empty();
     game.correct = 0;
     game.incorrect = 0;
@@ -86,60 +86,60 @@ var game = {
             }
         }
         $("#sub-div").append("<br><br><button type='button' class='btn btn-success' button id='end'>DONE</button>");
-    }, 
+    },
     done: function () {
         // checks each question
-        $.each($("input[name='question-0']:checked"), function(){
-            if ($(this).val()==questions[0].correctAnswer){
+        $.each($("input[name='question-0']:checked"), function () {
+            if ($(this).val() == questions[0].correctAnswer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
         });
-        $.each($("input[name='question-1']:checked"), function(){
-            if ($(this).val()==questions[1].correctAnswer){
+        $.each($("input[name='question-1']:checked"), function () {
+            if ($(this).val() == questions[1].correctAnswer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
         });
-        $.each($("input[name='question-2']:checked"), function(){
-            if ($(this).val()==questions[2].correctAnswer){
+        $.each($("input[name='question-2']:checked"), function () {
+            if ($(this).val() == questions[2].correctAnswer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
         });
-        $.each($("input[name='question-3']:checked"), function(){
-            if ($(this).val()==questions[3].correctAnswer){
+        $.each($("input[name='question-3']:checked"), function () {
+            if ($(this).val() == questions[3].correctAnswer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
         });
-        $.each($("input[name='question-4']:checked"), function(){
-            if ($(this).val()==questions[4].correctAnswer){
+        $.each($("input[name='question-4']:checked"), function () {
+            if ($(this).val() == questions[4].correctAnswer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
         });
-        $.each($("input[name='question-5']:checked"), function(){
-            if ($(this).val()==questions[5].correctAnswer){
+        $.each($("input[name='question-5']:checked"), function () {
+            if ($(this).val() == questions[5].correctAnswer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
         });
-        $.each($("input[name='question-6']:checked"), function(){
-            if ($(this).val()==questions[6].correctAnswer){
+        $.each($("input[name='question-6']:checked"), function () {
+            if ($(this).val() == questions[6].correctAnswer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
         });
-        $.each($("input[name='question-7']:checked"), function(){
-            if ($(this).val()==questions[7].correctAnswer){
+        $.each($("input[name='question-7']:checked"), function () {
+            if ($(this).val() == questions[7].correctAnswer) {
                 game.correct++;
             } else {
                 game.incorrect++;
@@ -150,16 +150,15 @@ var game = {
         $("#sub-div").append("<br><br><button type='button' class='btn btn-success' button id='restart'>TRY AGAIN</button>");
     },
 
-    result:function() {
+    result: function () {
         clearInterval(timer);
         $("#sub-div h2").remove();
 
         $("#sub-div").html("<h2>All done!</h2><br>");
         $("#sub-div").append("<h3>Correct Answers: " + this.correct + "</h3>");
         $("#sub-div").append("<h3>Incorrect Answers: " + this.incorrect + "</h3>");
-        $("#sub-div").append("<h3>Unanswered: " + (questions.length-(this.incorrect+this.correct)) + "</h3><br>");
+        $("#sub-div").append("<h3>Unanswered: " + (questions.length - (this.incorrect + this.correct)) + "</h3><br>");
         $("#sub-div").append("<img src='assets/images/ron.gif'>");
 
     }
 }
-
