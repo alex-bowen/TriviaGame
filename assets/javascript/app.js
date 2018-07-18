@@ -1,181 +1,165 @@
-// Currently, the program is not reading my "current" variable within the for loop and does not increment properly because of this. Really looking forward to cleaning this up and making function with some help.
-
-$(document).ready(function () {
-    console.log("ready!");
-
-    
-    $("#start-over").hide();
-    $("#questions").hide();
-
-
-    var questions = [
-        {
-            question: "Andy Dwyer's alter-ego, Agent Burt Macklin, has a brother. What's his name?",
-            answers: ["Kip Macklin", "Hugh Jackman", "Kip Hackman", "Kurt Macklin"],
-            correctAnswer: "Kip Hackman",
-            image: "../images/macklin.gif"
-            //will need to add syntax like: innerHTML = answer + '<img src="'+fruit.image+'">';
-        },
-
-        {
-            question: "Ron has brings permit to slaugter a pig for the Parks & Rec barbecue. What does it say?",
-            answers: ["Shut up.", "Don't sass me.", "I can do this.", "I can do what I want."],
-            correctAnswer: "I can do what I want",
-            image: "../images/ron.gif"
-        },
-
-        {
-            question: "In what year do Tom and Donna celebrate the first 'Treat Yo Self' day on the show?",
-            answers: ["2008", "2010", "2011", "2017"],
-            correctAnswer: "2011",
-            image: "../images/treatyoself.gif"
-        },
-
-        {
-            question: "Which of these is NOT another name for Garry Gergich?",
-            answers: ["Larry", "Jerry", "Terry", "Perry"],
-            correctAnswer: "Perry",
-            image: "../images/treatyoself.gif"
-        },
-        {
-            question: "What was the name of the failed sports complex that ended Ben's career as boy-mayor of Partridge, MN?",
-            answers: ["Ice Town", "Skate Town", "Ice Kingdom", "Snow Town"],
-            correctAnswer: "Ice Town",
-            image: "../images/macklin.gif"
-        },
-        {
-            question: "Which character wins an award for female empowerment?",
-            answers: ["Leslie Knope", "Ron Swanson", "Donna Meagle", "Anne Perkins"],
-            correctAnswer: "Ron Swanson",
-            image: "../images/macklin.gif"
-        },
-        {
-            question: "Who buys Tom's first (major) successful business, Rent-A-Swag?",
-            answers: ["Trevor Nelson", "Jean-Ralphio", "Dr. Saperstein", "Chris Traeger"],
-            correctAnswer: "Dr. Saperstein",
-            image: "../images/macklin.gif"
-        },
-        {
-            question: "Who plays beloved Pawnee mayor, Walter Gunderson?",
-            answers: ["Chevy Chase", "Rick Moranis", "Nick Offerman", "Bill Murray"],
-            correctAnswer: "Bill Murray",
-            image: "../images/macklin.gif"
-        }
-    ];
-
-
-    var currentTime = 3;
-    var current = 0;
-    // collect info from button user picks
-    var userChoice;
-    var questionInterval;
-    var correctCount;
-    var wrongCount;
-
-    $("#start-over").hide();
-    $("#questions").hide();
-
-    // start button
-    $("#start").click(startQuiz);
-
-
-    function runTimer() {
-        clearInterval(questionInterval);
-        questionInterval = setInterval(decrement, 1000);
-    }
-
-    function decrement() {
-        currentTime--;
-
-        $("#timer").html("You have " + currentTime + " seconds left.</h2>");
-
-        if (currentTime === 0) {
-            stopTimer();
-        
-        }
-
-         function stopTimer() {
-            clearInterval(questionInterval);
-        }
-    }
-
-
-
-    function startQuiz() {
-
-        $("#start").hide();
-        $("#questions").show();
-        $("#timer").html("You have " + currentTime + " seconds left.");
-
-
-        runTimer();
-
-        // start the timer
-        // $("#start").click(setTimeout(nextQuestion, 1000*30));
-        // and show it somewhere
-
-        for (var i = 0; i < questions.length; i++) {
-            $('#question').html(questions[current].question);
-
-            //loops through, adds answers
-            for (var j = 0; j < questions[current].answers.length; j++) {
-                $('#answerA').html(questions[current].answers[0]);
-                // answerA = $("#answerA").html();
-                $('#answerB').html(questions[current].answers[1]);
-                $('#answerC').html(questions[current].answers[2]);
-                $('#answerD').html(questions[current].answers[3]);
-            }
-
-            // timer for 30 seconds
-        }
-
-        progressLogic();
-
-        function pushValueA() {
-            userChoice = $('#answerA');
-        }
-        function pushValueB() {
-            userChoice = $('#answerB');
-        } 
-        function pushValueC() {
-            userChoice = $('#answerC');
-        } 
-        function pushValueD() {
-            userChoice = $('#answerD');
-        }
-    
-        $('#answerA').click(pushValueA());
-        console.log(userChoice);
-        $('#answerB').click(pushValueB());
-        $('#answerC').click(pushValueC());
-        $('#answerD').click(pushValueD());
-
-    }
-
-
-
-    function progressLogic () {
-    
-        if (currentTime === 0) {
-            currentTime = runTimer();
-            current++;
-            
-            $('#question').html(questions[current].question);
-
-        } else if (userChoice === questions[current].correctAnswer) {
-            // correctAnswer function
-            current++;
-        } else if (userChoice !== questions[current].correctAnswer) {
-            // wrongAnswer function
-            current++
-        } else if (current === questions.length) {
-            // results function
-        }
-    
-    }
-
-    // play again (same sort of thing as the start button)
-
-    $("#start-over").click(startQuiz);
-    console.log(currentTime);
+$("#start").on("click", function () {
+    game.start();
 });
+
+$(document).on("click", "#end", function() {
+    game.done();
+});
+
+$(document).on("click", "#restart", function() {
+    $("#sub-div").empty();
+    game.correct = 0;
+    game.incorrect = 0;
+    game.counter = 120;
+    game.start();
+});
+
+var questions = [
+    {
+        question: "Andy Dwyer's alter-ego, Agent Burt Macklin, has a brother. What's his name?",
+        answers: ["Kip Macklin", "Hugh Jackman", "Kip Hackman", "Kurt Macklin"],
+        correctAnswer: "Kip Hackman",
+    },
+
+    {
+        question: "Ron has brings permit to slaugter a pig for the Parks & Rec barbecue. What does it say?",
+        answers: ["Shut up.", "Don't sass me.", "I can do this.", "I can do what I want."],
+        correctAnswer: "I can do what I want.",
+    },
+
+    {
+        question: "In what year do Tom and Donna celebrate the first 'Treat Yo Self' day on the show?",
+        answers: ["2008", "2010", "2011", "2017"],
+        correctAnswer: "2011",
+    },
+
+    {
+        question: "Which of these is NOT another name for Garry Gergich?",
+        answers: ["Larry", "Jerry", "Terry", "Perry"],
+        correctAnswer: "Perry",
+    },
+    {
+        question: "What was the name of the failed sports complex that ended Ben's career as boy-mayor of Partridge, MN?",
+        answers: ["Ice Town", "Skate Town", "Ice Kingdom", "Snow Town"],
+        correctAnswer: "Ice Town",
+    },
+    {
+        question: "Which character wins an award for female empowerment?",
+        answers: ["Leslie Knope", "Ron Swanson", "Donna Meagle", "Anne Perkins"],
+        correctAnswer: "Ron Swanson",
+    },
+    {
+        question: "Who buys Tom's first (major) successful business, Rent-A-Swag?",
+        answers: ["Trevor Nelson", "Jean-Ralphio", "Dr. Saperstein", "Chris Traeger"],
+        correctAnswer: "Dr. Saperstein",
+    },
+    {
+        question: "Who plays beloved Pawnee mayor, Walter Gunderson?",
+        answers: ["Chevy Chase", "Rick Moranis", "Nick Offerman", "Bill Murray"],
+        correctAnswer: "Bill Murray",
+    }
+];
+
+var game = {
+    correct: 0,
+    incorrect: 0,
+    counter: 120,
+    countdown: function () {
+        game.counter--;
+        $("#counter").html(game.counter);
+
+        if (game.counter <= 0) {
+            console.log("Time's up!");
+            game.done();
+        }
+    },
+
+    start: function () {
+        timer = setInterval(game.countdown, 1000);
+        $("#sub-div").prepend("<h2><span id='counter'>120</span> seconds left!</h2>");
+
+        $("#start").remove();
+        for (var i = 0; i < questions.length; i++) {
+            $("#sub-div").append("<br><h2>" + questions[i].question + "</h2>");
+            for (var j = 0; j < questions[i].answers.length; j++) {
+                $("#sub-div").append("<input type='radio' name='question-" + i + "' value='" + questions[i].answers[j] + "'> " + questions[i].answers[j] + "<br>");
+            }
+        }
+        $("#sub-div").append("<br><br><button type='button' class='btn btn-success' button id='end'>DONE</button>");
+    }, 
+    done: function () {
+        // checks each question
+        $.each($("input[name='question-0']:checked"), function(){
+            if ($(this).val()==questions[0].correctAnswer){
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-1']:checked"), function(){
+            if ($(this).val()==questions[1].correctAnswer){
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-2']:checked"), function(){
+            if ($(this).val()==questions[2].correctAnswer){
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-3']:checked"), function(){
+            if ($(this).val()==questions[3].correctAnswer){
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-4']:checked"), function(){
+            if ($(this).val()==questions[4].correctAnswer){
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-5']:checked"), function(){
+            if ($(this).val()==questions[5].correctAnswer){
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-6']:checked"), function(){
+            if ($(this).val()==questions[6].correctAnswer){
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+        $.each($("input[name='question-7']:checked"), function(){
+            if ($(this).val()==questions[7].correctAnswer){
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        });
+
+        this.result();
+        $("#sub-div").append("<br><br><button type='button' class='btn btn-success' button id='restart'>TRY AGAIN</button>");
+    },
+
+    result:function() {
+        clearInterval(timer);
+        $("#sub-div h2").remove();
+
+        $("#sub-div").html("<h2>All done!</h2><br>");
+        $("#sub-div").append("<h3>Correct Answers: " + this.correct + "</h3>");
+        $("#sub-div").append("<h3>Incorrect Answers: " + this.incorrect + "</h3>");
+        $("#sub-div").append("<h3>Unanswered: " + (questions.length-(this.incorrect+this.correct)) + "</h3><br>");
+        $("#sub-div").append("<img src='assets/images/ron.gif'>");
+
+    }
+}
+
