@@ -1,3 +1,5 @@
+// Welcome to the Trivia Game!
+
 $("#start").on("click", function () {
     game.start();
 });
